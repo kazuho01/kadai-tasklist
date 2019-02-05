@@ -15,7 +15,6 @@ class TasksController < ApplicationController
   
   def create
     @task = current_user.tasks.build(task_params)
-    
     if @task.save
       flash[:success] = "タスクの投稿に成功しました"
       redirect_to root_url
@@ -51,7 +50,7 @@ class TasksController < ApplicationController
   #Strong Parameter
   
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
   end
 
   def task_params
